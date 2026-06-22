@@ -75,6 +75,7 @@ const Principal = () => {
   return (
     <>
       {/* Tela Principal */}
+
       <section className="hero" id="home">
         <div>
           <span className="eyebrow">web developer</span>
@@ -124,6 +125,7 @@ const Principal = () => {
       </section>
 
       {/* Sobre Mim */}
+      
       <section className="section" id="sobre">
         <div className="section-head reveal">
           <span className="eyebrow">sobre mim</span>
