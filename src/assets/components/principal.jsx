@@ -28,30 +28,69 @@ const Principal = () => {
       `<span class="punct">};</span>`,
     ]
 
-    const delays = [0, 160, 160, 200, 200, 160, 160, 300]
-    let i = 0
+    const CHAR_DELAY = 28
+    const LINE_DELAY = 180
+    const ids = []
 
-    const proxima = () => {
-      if (i >= linhas.length) return
-      const div = document.createElement('div')
-      div.innerHTML = linhas[i]
-      if (i === linhas.length - 1) {
-        const cursor = document.createElement('span')
-        cursor.className = 'cursor'
-        div.appendChild(cursor)
+    const tokenize = (html) => {
+      const tokens = []
+      let i = 0
+      while (i < html.length) {
+        if (html[i] === '<') {
+          const end = html.indexOf('>', i)
+          tokens.push({ tag: true, content: html.slice(i, end + 1) })
+          i = end + 1
+        } else {
+          tokens.push({ tag: false, content: html[i] })
+          i++
+        }
       }
+      return tokens
+    }
+
+    let lineIndex = 0
+
+    const typeLine = (div, tokens, idx, built, onDone) => {
+      if (idx >= tokens.length) {
+        div.innerHTML = built
+        onDone()
+        return
+      }
+      const token = tokens[idx]
+      const next = built + token.content
+      div.innerHTML = next + '<span class="cursor"></span>'
+      if (token.tag) {
+        typeLine(div, tokens, idx + 1, next, onDone)
+      } else {
+        const id = setTimeout(() => typeLine(div, tokens, idx + 1, next, onDone), CHAR_DELAY)
+        ids.push(id)
+      }
+    }
+
+    const typeNextLine = () => {
+      if (lineIndex >= linhas.length) {
+        const last = body.lastElementChild
+        if (last) {
+          const cursor = document.createElement('span')
+          cursor.className = 'cursor'
+          last.appendChild(cursor)
+        }
+        setBadgeVisible(true)
+        return
+      }
+      const div = document.createElement('div')
       body.appendChild(div)
-      i++
-      if (i < linhas.length) setTimeout(proxima, delays[i] || 200)
+      const tokens = tokenize(linhas[lineIndex++])
+      typeLine(div, tokens, 0, '', () => {
+        const id = setTimeout(typeNextLine, LINE_DELAY)
+        ids.push(id)
+      })
     }
 
-    const t1 = setTimeout(proxima, 800)
-    const t2 = setTimeout(() => setBadgeVisible(true), 2400)
+    const id = setTimeout(typeNextLine, 800)
+    ids.push(id)
 
-    return () => {
-      clearTimeout(t1)
-      clearTimeout(t2)
-    }
+    return () => ids.forEach(clearTimeout)
   }, [])
 
   useEffect(() => {
@@ -78,7 +117,7 @@ const Principal = () => {
 
       <section className="hero" id="home">
         <div>
-          <span className="eyebrow">web developer</span>
+          {/* <span className="eyebrow">web developer</span> */}
           <h1>
             Olá, me chamo Thyago Emanoel —{' '}
             <span className="blue">A sua ideia pode virar um sistema.</span>
@@ -128,8 +167,8 @@ const Principal = () => {
       
       <section className="section" id="sobre">
         <div className="section-head reveal">
-          <span className="eyebrow">sobre mim</span>
-          <h2>Deixem-me me Apresentar...</h2>
+          {/* <span className="eyebrow">sobre mim</span> */}
+          <h2>Deixe-me me Apresentar...</h2>
         </div>
 
         <div className="about-grid">
@@ -177,7 +216,7 @@ const Principal = () => {
       {/* Minhas Experiências e Aprendizagem em Tecnologia */}
       <section className="section" id="stack">
         <div className="section-head reveal">
-          <span className="eyebrow">stack</span>
+          {/* <span className="eyebrow">stack</span> */}
           <h2>Tecnologias que domino</h2>
           <p>
             As ferramentas que uso para transformar layout em produto real, do primeiro
@@ -297,7 +336,7 @@ const Principal = () => {
 
       <section className="section" id="projetos">
         <div className="section-head reveal">
-          <span className="eyebrow">projetos</span>
+          {/* <span className="eyebrow">projetos</span> */}
           <h2>Trabalhos selecionados</h2>
           <p>
             Uma seleção de projetos recentes — interfaces construídas do zero ou a
@@ -382,7 +421,7 @@ const Principal = () => {
 
       <section className="section" id="contato">
         <div className="contact-box reveal">
-          <span className="eyebrow">contato</span>
+          {/* <span className="eyebrow">contato</span> */}
           <h2>
             Tem um projeto em mente?<br />
             Vamos <span className="blue">conversar.</span>
