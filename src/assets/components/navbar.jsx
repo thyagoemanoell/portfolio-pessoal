@@ -21,7 +21,7 @@ const Navbar = () => {
             <li><a href="#projetos">Projetos</a></li>
             <li><a href="#contato">Contatos</a></li>
           </ul>
-          <a href="#contato" className="nav-cta">contato</a>
+          
           <button
             className="menu-toggle"
             onClick={() => setMenuOpen(true)}

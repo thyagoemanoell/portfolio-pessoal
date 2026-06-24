@@ -624,6 +624,8 @@ nav{
   margin-bottom:14px;
 }
 .project-status .dot{width:6px; height:6px; border-radius:50%; background:var(--green);}
+.project-status.em-preparacao{color:#FF3F1F;}
+.project-status.em-preparacao .dot{background:#FF3F1F; box-shadow:0 0 0 3px rgba(255,63,31,0.18);}
 .project-body h3{
   font-size:1.25rem;
   font-weight:700;

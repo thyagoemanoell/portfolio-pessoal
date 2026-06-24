@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import fotoPerfil from '../foto perfil/Foto Profissional 2 (longe).jpeg'
 import imgHtml from '../experiencia tecnologia/html.png'
 import imgCss from '../experiencia tecnologia/css.png'
@@ -10,7 +10,6 @@ import imgNextjs from '../estudando tecnologia/nextjs-ghnqttyc6ffbnqnn8xlrpj.web
 import imgTypescript from '../estudando tecnologia/Typescript_logo_2020.svg.png'
 
 const Principal = () => {
-  const [badgeVisible, setBadgeVisible] = useState(false)
   const terminalRef = useRef(null)
 
   useEffect(() => {
@@ -75,7 +74,6 @@ const Principal = () => {
           cursor.className = 'cursor'
           last.appendChild(cursor)
         }
-        setBadgeVisible(true)
         return
       }
       const div = document.createElement('div')
@@ -119,11 +117,11 @@ const Principal = () => {
         <div>
           {/* <span className="eyebrow">web developer</span> */}
           <h1>
-            Olá, me chamo Thyago Emanoel —{' '}
-            <span className="blue">A sua ideia pode virar um sistema.</span>
+            Olá, tudo bem?{' '}
+            <span className="blue">Vamos conversar sobre seu próximo projeto?</span>
           </h1>
           <p className="lead">
-            Construo sites e aplicações web com HTML, CSS, JavaScript e React — focado
+            Construo sites com aplicações web, com foco 
             em código limpo, performance e fidelidade ao design original.
           </p>
           <div className="hero-actions">
@@ -144,14 +142,7 @@ const Principal = () => {
         </div>
 
         <div className="terminal-wrap">
-          <div className={`float-badge${badgeVisible ? ' show' : ''}`}>
-            <span className="badge-dot"></span>
-            <span className="badge-text">
-              <span className="label">build passing</span>
-              <span className="sub">deploy ok · 2s</span>
-            </span>
-          </div>
-          <div className="terminal">
+            <div className="terminal">
             <div className="terminal-bar">
               <span className="terminal-dot" style={{ background: '#FF5F57' }}></span>
               <span className="terminal-dot" style={{ background: '#FEBC2E' }}></span>
@@ -168,27 +159,24 @@ const Principal = () => {
       <section className="section" id="sobre">
         <div className="section-head reveal">
           {/* <span className="eyebrow">sobre mim</span> */}
-          <h2>Deixe-me me Apresentar...</h2>
+          <h2 style={{ whiteSpace: 'nowrap' }}>Mais antes, deixe-me me apresentar...</h2>
         </div>
 
         <div className="about-grid">
           <div className="about-photo reveal">
-            <span className="status-chip">
-              <span className="dot"></span>disponível
-            </span>
             <img src={fotoPerfil} alt="Thyago Emanoel" />
           </div>
 
           <div className="about-text">
             <p className="reveal">
-              Sou <strong>desenvolvedor front-end Júnior</strong> e atualmente estou em fase de desenvolvimento com o
-              foco em transformar design em interfaces funcionais, responsivas e rápidas. Faço Bacharel em Ciência da Computação
-              e atualmente estou em aprendizagem para entender as melhores tecnologias na qual o mercado exige.
+              Olá, me Thyago Emanoel e sou <strong>desenvolvedor front-end</strong> e atualmente estou em fase de desenvolvimento com o
+              foco em transformar design em interfaces funcionais, responsivas e rápidas. Faço Bacharel em Ciência da Computação.
+              
             </p>
             <p className="reveal">
-              Trabalho com <strong>HTML, CSS, JavaScript e React</strong> no meu dia a dia,
-              sempre buscando me aperfeiçoar de maneira simples, rápida e eficaz, contudo tendo uma atenção redobrada aos
-              detalhes de UI, códigos e design para deixar o projeto mais consolidado e atender as expectativa dos meus clientes.
+              Trabalho com aplicações web no meu dia a dia,
+              e sempre busco me aperfeiçoar de maneira simples, rápida e eficaz, tendo uma atenção redobrada aos
+              detalhes de UI, códigos e design para deixar o projeto mais consolidado.
             </p>
             <p className="reveal">
               Fora dos projetos, estudo boas práticas de acessibilidade, performance web
@@ -217,10 +205,10 @@ const Principal = () => {
       <section className="section" id="stack">
         <div className="section-head reveal">
           {/* <span className="eyebrow">stack</span> */}
-          <h2>Tecnologias que domino</h2>
+          <h2>Skills</h2>
           <p>
             As ferramentas que uso para transformar layout em produto real, do primeiro
-            componente ao deploy — e o que estou estudando agora para expandir para o back-end.
+            componente ao deploy, e em constante aprendizagem em expandir para o back-end.
           </p>
         </div>
 
@@ -337,9 +325,9 @@ const Principal = () => {
       <section className="section" id="projetos">
         <div className="section-head reveal">
           {/* <span className="eyebrow">projetos</span> */}
-          <h2>Trabalhos selecionados</h2>
+          <h2>Projetos</h2>
           <p>
-            Uma seleção de projetos recentes — interfaces construídas do zero ou a
+            Uma seleção de projetos recentes, com interfaces construídas do zero <br /> ou a
             partir de um design entregue.
           </p>
         </div>
@@ -354,7 +342,7 @@ const Principal = () => {
               </svg>
             </div>
             <div className="project-body">
-              <div className="project-status"><span className="dot"></span>em produção</div>
+              <div className="project-status em-preparacao"><span className="dot"></span>em preparação</div>
               <h3>Plataforma Fintech</h3>
               <p>
                 Dashboard de gestão financeira para pequenas empresas, com gráficos em
@@ -389,7 +377,7 @@ const Principal = () => {
               </svg>
             </div>
             <div className="project-body">
-              <div className="project-status"><span className="dot"></span>em produção</div>
+              <div className="project-status em-preparacao"><span className="dot"></span>em preparação</div>
               <h3>Studio Nômade</h3>
               <p>
                 Site institucional para um estúdio de arquitetura, com foco em
@@ -424,7 +412,7 @@ const Principal = () => {
           {/* <span className="eyebrow">contato</span> */}
           <h2>
             Tem um projeto em mente?<br />
-            Vamos <span className="blue">conversar.</span>
+            Fale <span className="blue">comigo.</span>
           </h2>
           <p>
             Estou disponível para projetos freelance, oportunidades CLT ou só trocar
