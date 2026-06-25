@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import fotoPerfil from '../foto perfil/Foto Profissional 2 (longe).jpeg'
 import imgHtml from '../experiencia tecnologia/html.png'
 import imgCss from '../experiencia tecnologia/css.png'
@@ -9,8 +9,74 @@ import imgNode from '../estudando tecnologia/Node.js.png'
 import imgNextjs from '../estudando tecnologia/nextjs-ghnqttyc6ffbnqnn8xlrpj.webp'
 import imgTypescript from '../estudando tecnologia/Typescript_logo_2020.svg.png'
 
+const projects = [
+  {
+    id: 1,
+    title: 'Plataforma Fintech',
+    status: 'em-preparacao',
+    statusLabel: 'em preparação',
+    description: 'Dashboard de gestão financeira para pequenas empresas, com gráficos em tempo real e fluxo de aprovação.',
+    tags: ['React', 'CSS Modules', 'API REST'],
+    images: [null, null, null],
+    gradient: 'linear-gradient(150deg, #22229E, #134BF2)',
+    demo: '#',
+    code: '#',
+  },
+  {
+    id: 2,
+    title: 'Studio Nômade',
+    status: 'em-preparacao',
+    statusLabel: 'em preparação',
+    description: 'Site institucional para um estúdio de arquitetura, com foco em performance e animações sutis no scroll.',
+    tags: ['HTML', 'CSS3', 'JavaScript'],
+    images: [null, null, null],
+    gradient: 'linear-gradient(150deg, #1a2a6c, #b21f1f)',
+    demo: '#',
+    code: '#',
+  },
+]
+
 const Principal = () => {
   const terminalRef = useRef(null)
+  const [modalProject, setModalProject] = useState(null)
+  const [slide, setSlide] = useState(0)
+  const [lightbox, setLightbox] = useState(false)
+
+  const openModal = (project) => { setModalProject(project); setSlide(0) }
+  const closeModal = () => { setModalProject(null); setSlide(0); setLightbox(false) }
+  const prevSlide = () => setSlide(s => (s - 1 + modalProject.images.length) % modalProject.images.length)
+  const nextSlide = () => setSlide(s => (s + 1) % modalProject.images.length)
+
+  useEffect(() => {
+    if (!modalProject) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        if (lightbox) setLightbox(false)
+        else closeModal()
+      }
+      if (lightbox) {
+        if (e.key === 'ArrowRight') setSlide(s => (s + 1) % modalProject.images.length)
+        if (e.key === 'ArrowLeft')  setSlide(s => (s - 1 + modalProject.images.length) % modalProject.images.length)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [modalProject, lightbox])
+
+  useEffect(() => {
+    if (modalProject) {
+      const scrollY = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
+      return () => {
+        document.body.style.position = ''
+        document.body.style.top = ''
+        document.body.style.width = ''
+        window.scrollTo(0, scrollY)
+      }
+    }
+  }, [modalProject])
 
   useEffect(() => {
     const body = terminalRef.current
@@ -169,7 +235,7 @@ const Principal = () => {
 
           <div className="about-text">
             <p className="reveal">
-              Olá, me Thyago Emanoel e sou <strong>desenvolvedor front-end</strong> e atualmente estou em fase de desenvolvimento com o
+              Olá! me Thyago Emanoel e sou <strong>desenvolvedor front-end</strong> e atualmente estou em fase de desenvolvimento com o
               foco em transformar design em interfaces funcionais, responsivas e rápidas. Faço Bacharel em Ciência da Computação.
               
             </p>
@@ -247,7 +313,7 @@ const Principal = () => {
               <span className="stack-tag mono">ES6+</span>
             </div>
             <h3>JavaScript</h3>
-            <p className="stack-desc">Lógica de interação, manipulação de DOM e APIs.</p>
+            <p className="stack-desc">Lógica de interação com manipulações da DOM e APIs.</p>
             <div className="stack-bar"><div className="stack-bar-fill"></div></div>
             <span className="stack-percent mono">70%</span>
           </div>
@@ -273,7 +339,7 @@ const Principal = () => {
               <span className="stack-tag mono">SQL</span>
             </div>
             <h3>MySQL</h3>
-            <p className="stack-desc">Modelagem de dados, queries e integração com back-end.</p>
+            <p className="stack-desc">Modelagem de dados, queries e integrações com o back-end.</p>
             <div className="stack-bar"><div className="stack-bar-fill"></div></div>
             <span className="stack-percent mono">78%</span>
           </div>
@@ -293,7 +359,7 @@ const Principal = () => {
             </div>
             <div>
               <h4>Node.js</h4>
-              <span>back-end &amp; APIs</span>
+              <span>back-end & APIs</span>
             </div>
           </div>
 
@@ -303,7 +369,7 @@ const Principal = () => {
             </div>
             <div>
               <h4>Next.js</h4>
-              <span>SSR &amp; rotas</span>
+              <span>SSR & rotas</span>
             </div>
           </div>
 
@@ -333,77 +399,172 @@ const Principal = () => {
         </div>
 
         <div className="project-grid">
-          <div className="project-card reveal">
-            <div className="project-thumb">
-              <div className="browser-bar"><span></span><span></span><span></span></div>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M3 9h18M9 21V9" />
-              </svg>
-            </div>
-            <div className="project-body">
-              <div className="project-status em-preparacao"><span className="dot"></span>em preparação</div>
-              <h3>Plataforma Fintech</h3>
-              <p>
-                Dashboard de gestão financeira para pequenas empresas, com gráficos em
-                tempo real e fluxo de aprovação.
-              </p>
-              <div className="project-tags">
-                <span>React</span><span>CSS Modules</span><span>API REST</span>
-              </div>
-              <div className="project-links">
-                <a href="#">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+          {projects.map(project => (
+            <div key={project.id} className="project-card reveal">
+              <div className="project-thumb" style={{ background: project.gradient }}>
+                <div className="browser-bar">
+                  <span style={{ background: '#FF5F57' }}></span>
+                  <span style={{ background: '#FEBC2E' }}></span>
+                  <span style={{ background: '#28C840' }}></span>
+                </div>
+                {project.images[0] ? (
+                  <img src={project.images[0]} alt={project.title} />
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M3 9h18M9 21V9" />
                   </svg>
-                  Ver demo
-                </a>
-                <a href="#">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-                  </svg>
-                  Código
-                </a>
+                )}
+              </div>
+              <div className="project-body">
+                <div className={`project-status ${project.status}`}><span className="dot"></span>{project.statusLabel}</div>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="project-tags">
+                  {project.tags.map(tag => <span key={tag}>{tag}</span>)}
+                </div>
+                <div className="project-links">
+                  <button className="project-demo-btn" onClick={() => openModal(project)}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Ver demo
+                  </button>
+                  <a href={project.code}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                    </svg>
+                    Código
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
+      </section>
 
-          <div className="project-card reveal">
-            <div className="project-thumb">
-              <div className="browser-bar"><span></span><span></span><span></span></div>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M3 9h18M9 21V9" />
+      {/* Modal de projeto com carrossel */}
+      {modalProject && (
+        <div className="project-modal-overlay" onClick={closeModal}>
+          <div className="project-modal" onClick={e => e.stopPropagation()}>
+            <button className="project-modal-close" onClick={closeModal} aria-label="Fechar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M18 6L6 18M6 6l12 12" />
               </svg>
-            </div>
-            <div className="project-body">
-              <div className="project-status em-preparacao"><span className="dot"></span>em preparação</div>
-              <h3>Studio Nômade</h3>
-              <p>
-                Site institucional para um estúdio de arquitetura, com foco em
-                performance e animações sutis no scroll.
-              </p>
-              <div className="project-tags">
-                <span>HTML</span><span>CSS3</span><span>JavaScript</span>
+            </button>
+
+            <div className="modal-carousel">
+              <div
+                className="modal-carousel-track"
+                style={{ transform: `translateX(-${slide * 100}%)` }}
+              >
+                {modalProject.images.map((img, i) => (
+                  <div
+                    key={i}
+                    className="modal-slide"
+                    style={{ background: modalProject.gradient, cursor: img ? 'zoom-in' : 'default' }}
+                    onClick={() => img && setLightbox(true)}
+                  >
+                    {img ? (
+                      <img src={img} alt={`${modalProject.title} screenshot ${i + 1}`} />
+                    ) : (
+                      <div className="modal-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                          <path d="M3 9h18M9 21V9" />
+                        </svg>
+                        <span>Screenshot {i + 1}</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-              <div className="project-links">
-                <a href="#">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
-                  </svg>
-                  Ver demo
-                </a>
-                <a href="#">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-                  </svg>
-                  Código
-                </a>
+              {modalProject.images.length > 1 && (
+                <>
+                  <button className="modal-nav modal-nav-prev" onClick={prevSlide} aria-label="Anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button className="modal-nav modal-nav-next" onClick={nextSlide} aria-label="Próximo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </button>
+                  <div className="modal-dots">
+                    {modalProject.images.map((_, i) => (
+                      <button
+                        key={i}
+                        className={`modal-dot${i === slide ? ' active' : ''}`}
+                        onClick={() => setSlide(i)}
+                        aria-label={`Slide ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="modal-info">
+              <div className={`project-status ${modalProject.status}`}>
+                <span className="dot"></span>{modalProject.statusLabel}
+              </div>
+              <h3>{modalProject.title}</h3>
+              <p>{modalProject.description}</p>
+              <div className="project-tags">
+                {modalProject.tags.map(tag => <span key={tag}>{tag}</span>)}
+              </div>
+              <div className="modal-actions">
+                <a href={modalProject.code} className="btn-secondary">Código</a>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      )}
+
+      {/* Lightbox tela cheia */}
+      {lightbox && modalProject && (
+        <div className="lightbox-overlay" onClick={() => setLightbox(false)}>
+          <button className="lightbox-close" onClick={() => setLightbox(false)} aria-label="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+
+          {modalProject.images.length > 1 && (
+            <button
+              className="lightbox-nav lightbox-nav-prev"
+              onClick={e => { e.stopPropagation(); setSlide(s => (s - 1 + modalProject.images.length) % modalProject.images.length) }}
+              aria-label="Anterior"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+          )}
+
+          <img
+            src={modalProject.images[slide]}
+            alt={`${modalProject.title} screenshot ${slide + 1}`}
+            className="lightbox-img"
+            onClick={e => e.stopPropagation()}
+          />
+
+          {modalProject.images.length > 1 && (
+            <button
+              className="lightbox-nav lightbox-nav-next"
+              onClick={e => { e.stopPropagation(); setSlide(s => (s + 1) % modalProject.images.length) }}
+              aria-label="Próximo"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          )}
+
+          <div className="lightbox-counter">{slide + 1} / {modalProject.images.length}</div>
+        </div>
+      )}
 
       {/* Falar Comigo */}
 
