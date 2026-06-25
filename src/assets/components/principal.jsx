@@ -9,26 +9,27 @@ import imgNode from '../estudando tecnologia/Node.js.png'
 import imgNextjs from '../estudando tecnologia/nextjs-ghnqttyc6ffbnqnn8xlrpj.webp'
 import imgTypescript from '../estudando tecnologia/Typescript_logo_2020.svg.png'
 
+// Lista de Descrição de Projetos
 const projects = [
   {
     id: 1,
-    title: 'Plataforma Fintech',
+    title: 'Bs-Imóveis',
     status: 'em-preparacao',
-    statusLabel: 'em preparação',
-    description: 'Dashboard de gestão financeira para pequenas empresas, com gráficos em tempo real e fluxo de aprovação.',
-    tags: ['React', 'CSS Modules', 'API REST'],
+    statusLabel: 'em andamento',
+    description: 'Site Institucional de Corretor Imobiliário com o foco em apresentar lotamentos, imóveis e entre outros serviços prestados.',
+    tags: ['HTML', 'CSS3', 'REACT', 'JAVASCRIPT'],
     images: [null, null, null],
     gradient: 'linear-gradient(150deg, #22229E, #134BF2)',
     demo: '#',
-    code: '#',
+    code: '#'
   },
   {
     id: 2,
     title: 'Studio Nômade',
     status: 'em-preparacao',
-    statusLabel: 'em preparação',
+    statusLabel: 'em andamento',
     description: 'Site institucional para um estúdio de arquitetura, com foco em performance e animações sutis no scroll.',
-    tags: ['HTML', 'CSS3', 'JavaScript'],
+    tags: ['HTML', 'CSS3', 'REACT', 'JAVASCRIPT'],
     images: [null, null, null],
     gradient: 'linear-gradient(150deg, #1a2a6c, #b21f1f)',
     demo: '#',
@@ -181,7 +182,6 @@ const Principal = () => {
 
       <section className="hero" id="home">
         <div>
-          {/* <span className="eyebrow">web developer</span> */}
           <h1>
             Olá, tudo bem?{' '}
             <span className="blue">Vamos conversar sobre seu próximo projeto?</span>
@@ -224,7 +224,6 @@ const Principal = () => {
       
       <section className="section" id="sobre">
         <div className="section-head reveal">
-          {/* <span className="eyebrow">sobre mim</span> */}
           <h2 style={{ whiteSpace: 'nowrap' }}>Mais antes, deixe-me me apresentar...</h2>
         </div>
 
@@ -249,20 +248,6 @@ const Principal = () => {
               e novas formas de estruturar componentes de forma escalável.
             </p>
 
-            <div className="about-facts reveal">
-              <div>
-                {/* <div className="fact-num">20+</div>
-                <div className="fact-label">Projetos construídos</div> */}
-              </div>
-              <div>
-                {/* <div className="fact-num">3</div>
-                <div className="fact-label">Anos com React</div> */}
-              </div>
-              <div>
-                {/* <div className="fact-num">100%</div>
-                <div className="fact-label">Responsivo &amp; acessível</div> */}
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -270,7 +255,6 @@ const Principal = () => {
       {/* Minhas Experiências e Aprendizagem em Tecnologia */}
       <section className="section" id="stack">
         <div className="section-head reveal">
-          {/* <span className="eyebrow">stack</span> */}
           <h2>Skills</h2>
           <p>
             As ferramentas que uso para transformar layout em produto real, do primeiro
@@ -390,7 +374,6 @@ const Principal = () => {
 
       <section className="section" id="projetos">
         <div className="section-head reveal">
-          {/* <span className="eyebrow">projetos</span> */}
           <h2>Projetos</h2>
           <p>
             Uma seleção de projetos recentes, com interfaces construídas do zero <br /> ou a
@@ -428,9 +411,10 @@ const Principal = () => {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
                     </svg>
-                    Ver demo
+                    Visualizar projeto
                   </button>
-                  <a href={project.code}>
+                  
+                  <a href={project.code} target="_blank" rel="noreferrer"> 
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
                     </svg>
@@ -514,9 +498,6 @@ const Principal = () => {
               <div className="project-tags">
                 {modalProject.tags.map(tag => <span key={tag}>{tag}</span>)}
               </div>
-              <div className="modal-actions">
-                <a href={modalProject.code} className="btn-secondary">Código</a>
-              </div>
             </div>
           </div>
         </div>
@@ -570,7 +551,6 @@ const Principal = () => {
 
       <section className="section" id="contato">
         <div className="contact-box reveal">
-          {/* <span className="eyebrow">contato</span> */}
           <h2>
             Tem um projeto em mente?<br />
             Fale <span className="blue">comigo.</span>
@@ -579,9 +559,6 @@ const Principal = () => {
             Estou disponível para projetos freelance, oportunidades CLT ou só trocar
             uma ideia sobre tecnologia.
           </p>
-          
-          {/* <a href="" className="contact-email"></a> */}
-          
           <div className="contact-channels">
             <a href="https://github.com/thyagoemanoell" className="channel" target="_blank" rel="noreferrer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
