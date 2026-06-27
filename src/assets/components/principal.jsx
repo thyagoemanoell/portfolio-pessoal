@@ -8,17 +8,22 @@ import imgMysql from '../estudando tecnologia/mysql.png'
 import imgNode from '../estudando tecnologia/Node.js.png'
 import imgNextjs from '../estudando tecnologia/nextjs-ghnqttyc6ffbnqnn8xlrpj.webp'
 import imgTypescript from '../estudando tecnologia/Typescript_logo_2020.svg.png'
+import bsImoveis1 from '../img de projetos reais feitos/bs-imoveis/imagem 1.png'
+import bsImoveis2 from '../img de projetos reais feitos/bs-imoveis/imagem 2.png'
+import bsImoveis3 from '../img de projetos reais feitos/bs-imoveis/imagem 3.png'
+import bsImoveis4 from '../img de projetos reais feitos/bs-imoveis/imagem 4.png'
+import bsImoveis5 from '../img de projetos reais feitos/bs-imoveis/imagem 5.png'
 
 // Lista de Descrição de Projetos
 const projects = [
   {
     id: 1,
-    title: 'Bs-Imóveis',
+    title: 'BS Imóveis',
     status: 'em-preparacao',
     statusLabel: 'em andamento',
-    description: 'Site Institucional de Corretor Imobiliário com o foco em apresentar lotamentos, imóveis e entre outros serviços prestados.',
+    description: 'Site institucional para consultoria imobiliária, com foco em apresentar imóveis e loteamentos de forma visualmente atrativas, com chamadas diretas para conversão via WthatsApp.',
     tags: ['HTML', 'CSS3', 'REACT', 'JAVASCRIPT'],
-    images: [null, null, null],
+    images: [bsImoveis1, bsImoveis2, bsImoveis3, bsImoveis4, bsImoveis5],
     gradient: 'linear-gradient(150deg, #22229E, #134BF2)',
     demo: '#',
     code: '#'
@@ -35,34 +40,32 @@ const projects = [
     demo: '#',
     code: '#',
   },
+
 ]
 
 const Principal = () => {
   const terminalRef = useRef(null)
   const [modalProject, setModalProject] = useState(null)
   const [slide, setSlide] = useState(0)
-  const [lightbox, setLightbox] = useState(false)
 
-  const openModal = (project) => { setModalProject(project); setSlide(0) }
-  const closeModal = () => { setModalProject(null); setSlide(0); setLightbox(false) }
+  const openModal = (project) => {
+    if (!project.images.some(Boolean)) return
+    setModalProject(project); setSlide(0)
+  }
+  const closeModal = () => { setModalProject(null); setSlide(0) }
   const prevSlide = () => setSlide(s => (s - 1 + modalProject.images.length) % modalProject.images.length)
   const nextSlide = () => setSlide(s => (s + 1) % modalProject.images.length)
 
   useEffect(() => {
     if (!modalProject) return
     const onKey = (e) => {
-      if (e.key === 'Escape') {
-        if (lightbox) setLightbox(false)
-        else closeModal()
-      }
-      if (lightbox) {
-        if (e.key === 'ArrowRight') setSlide(s => (s + 1) % modalProject.images.length)
-        if (e.key === 'ArrowLeft')  setSlide(s => (s - 1 + modalProject.images.length) % modalProject.images.length)
-      }
+      if (e.key === 'Escape') closeModal()
+      if (e.key === 'ArrowRight') nextSlide()
+      if (e.key === 'ArrowLeft')  prevSlide()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [modalProject, lightbox])
+  }, [modalProject])
 
   useEffect(() => {
     if (modalProject) {
@@ -224,7 +227,7 @@ const Principal = () => {
       
       <section className="section" id="sobre">
         <div className="section-head reveal">
-          <h2 style={{ whiteSpace: 'nowrap' }}>Mais antes, deixe-me me apresentar...</h2>
+          <h2>Mais antes, deixe-me me apresentar...</h2>
         </div>
 
         <div className="about-grid">
@@ -382,14 +385,19 @@ const Principal = () => {
         </div>
 
         <div className="project-grid">
-          {projects.map(project => (
+          {projects.map(project => {
+            const hasImages = project.images.some(Boolean)
+            return (
             <div key={project.id} className="project-card reveal">
-              <div className="project-thumb" style={{ background: project.gradient }}>
-                <div className="browser-bar">
-                  <span style={{ background: '#FF5F57' }}></span>
-                  <span style={{ background: '#FEBC2E' }}></span>
-                  <span style={{ background: '#28C840' }}></span>
-                </div>
+              <div
+                className="project-thumb"
+                style={{ background: project.gradient, cursor: hasImages ? 'pointer' : 'default' }}
+                onClick={hasImages ? () => openModal(project) : undefined}
+                role={hasImages ? 'button' : undefined}
+                tabIndex={hasImages ? 0 : undefined}
+                onKeyDown={hasImages ? (e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(project) } }) : undefined}
+                aria-label={hasImages ? `Abrir imagens de ${project.title}` : undefined}
+              >
                 {project.images[0] ? (
                   <img src={project.images[0]} alt={project.title} />
                 ) : (
@@ -407,14 +415,7 @@ const Principal = () => {
                   {project.tags.map(tag => <span key={tag}>{tag}</span>)}
                 </div>
                 <div className="project-links">
-                  <button className="project-demo-btn" onClick={() => openModal(project)}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
-                    </svg>
-                    Visualizar projeto
-                  </button>
-                  
-                  <a href={project.code} target="_blank" rel="noreferrer"> 
+                  <a href={project.code} target="_blank" rel="noreferrer">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
                     </svg>
@@ -423,90 +424,14 @@ const Principal = () => {
                 </div>
               </div>
             </div>
-          ))}
+          )})}
         </div>
       </section>
 
-      {/* Modal de projeto com carrossel */}
+      {/* Carrossel de imagens em tela cheia */}
       {modalProject && (
-        <div className="project-modal-overlay" onClick={closeModal}>
-          <div className="project-modal" onClick={e => e.stopPropagation()}>
-            <button className="project-modal-close" onClick={closeModal} aria-label="Fechar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
-
-            <div className="modal-carousel">
-              <div
-                className="modal-carousel-track"
-                style={{ transform: `translateX(-${slide * 100}%)` }}
-              >
-                {modalProject.images.map((img, i) => (
-                  <div
-                    key={i}
-                    className="modal-slide"
-                    style={{ background: modalProject.gradient, cursor: img ? 'zoom-in' : 'default' }}
-                    onClick={() => img && setLightbox(true)}
-                  >
-                    {img ? (
-                      <img src={img} alt={`${modalProject.title} screenshot ${i + 1}`} />
-                    ) : (
-                      <div className="modal-placeholder">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                          <rect x="3" y="3" width="18" height="18" rx="2" />
-                          <path d="M3 9h18M9 21V9" />
-                        </svg>
-                        <span>Screenshot {i + 1}</span>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              {modalProject.images.length > 1 && (
-                <>
-                  <button className="modal-nav modal-nav-prev" onClick={prevSlide} aria-label="Anterior">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M15 18l-6-6 6-6" />
-                    </svg>
-                  </button>
-                  <button className="modal-nav modal-nav-next" onClick={nextSlide} aria-label="Próximo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M9 18l6-6-6-6" />
-                    </svg>
-                  </button>
-                  <div className="modal-dots">
-                    {modalProject.images.map((_, i) => (
-                      <button
-                        key={i}
-                        className={`modal-dot${i === slide ? ' active' : ''}`}
-                        onClick={() => setSlide(i)}
-                        aria-label={`Slide ${i + 1}`}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-
-            <div className="modal-info">
-              <div className={`project-status ${modalProject.status}`}>
-                <span className="dot"></span>{modalProject.statusLabel}
-              </div>
-              <h3>{modalProject.title}</h3>
-              <p>{modalProject.description}</p>
-              <div className="project-tags">
-                {modalProject.tags.map(tag => <span key={tag}>{tag}</span>)}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Lightbox tela cheia */}
-      {lightbox && modalProject && (
-        <div className="lightbox-overlay" onClick={() => setLightbox(false)}>
-          <button className="lightbox-close" onClick={() => setLightbox(false)} aria-label="Fechar">
+        <div className="lightbox-overlay" onClick={closeModal}>
+          <button className="lightbox-close" onClick={closeModal} aria-label="Fechar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
