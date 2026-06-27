@@ -299,6 +299,7 @@ const Principal = () => {
               </div>
               <span className="stack-tag mono">ES6+</span>
             </div>
+            
             <h3>JavaScript</h3>
             <p className="stack-desc">Lógica de interação com manipulações da DOM e APIs.</p>
             <div className="stack-bar"><div className="stack-bar-fill"></div></div>
