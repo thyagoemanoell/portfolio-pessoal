@@ -254,8 +254,8 @@ const Principal = () => {
         <div className="section-head reveal">
           <h2>Skills</h2>
           <p>
-            As ferramentas que uso para transformar layout em produto real, do primeiro
-            componente ao deploy, e em constante aprendizagem em expandir para o back-end.
+            Algumas ferramentas que eu uso para transformar layout em produto real, desde o primeiro
+            componente até o deploy, e em constante aprendizagem em expandir para o back-end.
           </p>
         </div>
 
