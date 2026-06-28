@@ -227,7 +227,7 @@ const Principal = () => {
       
       <section className="section" id="sobre">
         <div className="section-head reveal">
-          <h2>Mais antes, deixe-me me apresentar...</h2>
+          <h2>Mas antes, deixe-me me apresentar...</h2>
         </div>
 
         <div className="about-grid">
@@ -237,20 +237,14 @@ const Principal = () => {
 
           <div className="about-text">
             <p className="reveal">
-              Olá! me Thyago Emanoel e sou <strong>desenvolvedor front-end</strong> e atualmente estou em fase de desenvolvimento com o
-              foco em transformar design em interfaces funcionais, responsivas e rápidas. Faço Bacharel em Ciência da Computação.
-              
+              Olá! Me chamo Thyago Emanoel e sou <strong>desenvolvedor front-end</strong>, com foco em transformar design em interfaces funcionais, responsivas e rápidas. Faço Bacharelado em Ciência da Computação.
             </p>
             <p className="reveal">
-              Trabalho com aplicações web no meu dia a dia,
-              e sempre busco me aperfeiçoar de maneira simples, rápida e eficaz, tendo uma atenção redobrada aos
-              detalhes de UI, códigos e design para deixar o projeto mais consolidado.
+              Trabalho com aplicações web no meu dia a dia, e sempre busco me aperfeiçoar de maneira simples, rápida e eficaz, tendo uma atenção redobrada aos detalhes de UI, código e design para deixar o projeto mais consolidado.
             </p>
             <p className="reveal">
-              Fora dos projetos, estudo boas práticas de acessibilidade, performance web
-              e novas formas de estruturar componentes de forma escalável.
+              Fora dos projetos, estudo boas práticas de acessibilidade, performance web e novas formas de estruturar componentes de forma escalável.
             </p>
-
           </div>
         </div>
       </section>

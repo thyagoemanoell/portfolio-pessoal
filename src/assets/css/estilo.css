@@ -346,6 +346,7 @@ nav{
   display:grid;
   grid-template-columns:320px 1fr;
   gap:64px;
+  align-items:center;
 }
 .about-photo{
   aspect-ratio:1/1;
@@ -388,8 +389,7 @@ nav{
   color:var(--ink-soft);
   font-size:1.05rem;
   line-height:1.85;
-  margin-bottom:22px;
-  max-width:640px;
+  margin-bottom:18px;
 }
 .about-text strong{color:var(--ink); font-weight:700;}
 
@@ -995,12 +995,13 @@ footer .mono{font-size:0.82rem;}
   .hero p.lead{max-width:100%; font-size:1rem;}
   .hero-actions .btn-primary, .hero-actions .btn-secondary{padding:12px 18px;}
   .terminal-body{min-height:180px; padding:16px;}
-  /* empurra o terminal um pouco para baixo para evitar sobreposição com o conteúdo */
   .terminal-wrap{margin-top:12px;}
   .menu-toggle{right:12px;}
   .stack-grid{grid-template-columns:repeat(2,1fr);}
   .learning-grid{grid-template-columns:1fr;}
-  .about-photo{aspect-ratio:1/1;}
+  .about-photo{aspect-ratio:4/3;}
+  .section-head{max-width:100%; margin-bottom:32px;}
+  .section-head h2{font-size:clamp(1.5rem,5.5vw,1.9rem);}
   .project-card{
     border-radius:14px;
     overflow:hidden;
