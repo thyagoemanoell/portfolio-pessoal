@@ -202,12 +202,12 @@ const Principal = () => {
             </a>
             <a href="#contato" className="btn-secondary">Fale comigo</a>
           </div>
-          <div className="hero-tags">
+          {/* <div className="hero-tags">
             <span className="hero-tag">HTML5</span>
             <span className="hero-tag">CSS3</span>
             <span className="hero-tag">JavaScript</span>
             <span className="hero-tag">React</span>
-          </div>
+          </div> */}
         </div>
 
         <div className="terminal-wrap">
@@ -237,10 +237,10 @@ const Principal = () => {
 
           <div className="about-text">
             <p className="reveal">
-              Olá! Me chamo Thyago Emanoel e sou <strong>desenvolvedor front-end</strong>, com foco em transformar design em interfaces funcionais, responsivas e rápidas. Faço Bacharelado em Ciência da Computação.
+              Olá! Me chamo Thyago Emanoel e sou <strong>desenvolvedor front-end</strong>, focado em transformar design em interfaces funcionais, responsivas e rápidas. Faço Bacharelado em Ciência da Computação.
             </p>
             <p className="reveal">
-              Trabalho com aplicações web no meu dia a dia, e sempre busco me aperfeiçoar de maneira simples, rápida e eficaz, tendo uma atenção redobrada aos detalhes de UI, código e design para deixar o projeto mais consolidado.
+              Trabalho com aplicações web no meu dia a dia, e sempre busco me aperfeiçoar de maneira simples e eficaz, tendo uma atenção redobrada aos detalhes de UI, código e design para deixar o projeto mais consolidado.
             </p>
             <p className="reveal">
               Fora dos projetos, estudo boas práticas de acessibilidade, performance web e novas formas de estruturar componentes de forma escalável.
