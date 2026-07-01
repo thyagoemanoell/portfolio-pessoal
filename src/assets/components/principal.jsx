@@ -291,7 +291,7 @@ const Principal = () => {
               <div className="stack-icon">
                 <img src={imgJs} alt="JavaScript" />
               </div>
-              <span className="stack-tag mono">ES6+</span>
+              <span className="stack-tag mono">ES2026</span>
             </div>
             <h3>JavaScript</h3>
             <p className="stack-desc">Lógica de interação com manipulações da DOM e APIs.</p>
@@ -304,7 +304,7 @@ const Principal = () => {
               <div className="stack-icon">
                 <img src={imgReact} alt="React" />
               </div>
-              <span className="stack-tag mono">18</span>
+              <span className="stack-tag mono">19</span>
             </div>
             <h3>React</h3>
             <p className="stack-desc">Componentização, hooks e gerenciamento de estado.</p>
@@ -317,7 +317,7 @@ const Principal = () => {
               <div className="stack-icon">
                 <img src={imgMysql} alt="MySQL" />
               </div>
-              <span className="stack-tag mono">SQL</span>
+              <span className="stack-tag mono">v8.0.46</span>
             </div>
             <h3>MySQL</h3>
             <p className="stack-desc">Modelagem de dados, queries e integrações com o back-end.</p>
